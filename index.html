@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Doces da Vivi | Mineiros-GO</title>
+<style>
+:root{--cor:#5B3A2D;--cor2:#442a20;--bege:#E4DACE;--creme:#F6F1EA}
+*{box-sizing:border-box;margin:0}body{font-family:Poppins,Segoe UI,sans-serif;background:var(--creme);color:#3a1a2a}
+header{background:var(--bege);color:var(--cor);padding:12px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+header img{height:44px;background:#fff;border-radius:50%}header b{font-size:20px;flex:1}
+header a{color:var(--cor);text-decoration:none;font-weight:600}
+.faixa{background:var(--cor2);color:#fff;overflow:hidden;white-space:nowrap;padding:8px 0;font-weight:600;font-size:14px}
+.faixa div{display:inline-block;animation:m 22s linear infinite}.faixa span{margin:0 28px}
+@keyframes m{to{transform:translateX(-50%)}}
+.hero{max-width:1000px;margin:30px auto;padding:0 20px;display:flex;align-items:center;gap:30px;flex-wrap:wrap;justify-content:center}
+.hero img{height:340px}.infos{flex:1;min-width:260px;display:grid;gap:12px}
+.info{background:#fff;border-radius:16px;padding:14px 18px;border-left:6px solid var(--cor);box-shadow:0 4px 14px #5b3a2d22}
+.info b{color:var(--cor)}h1{color:var(--cor);font-size:34px}
+h2{text-align:center;color:var(--cor);margin:30px 0 16px}
+.cats{max-width:1000px;margin:auto;padding:0 20px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.cat{background:var(--cor);border-radius:22px;color:#fff;text-align:center;padding:18px;cursor:pointer;border:0;font:inherit;transition:.2s}
+.cat:hover{transform:translateY(-6px)}.cat img{height:190px}.cat h3{font-size:24px;margin:8px 0}.cat span{background:#fff;color:var(--cor);padding:6px 16px;border-radius:20px;font-weight:700;font-size:14px}
+#load{position:fixed;inset:0;background:var(--cor);z-index:20;display:none;flex-direction:column;align-items:center;justify-content:center;color:#fff}
+.circ{width:170px;height:170px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;position:relative}
+.circ img{width:120px}.circ:before{content:"";position:absolute;inset:-12px;border-radius:50%;border:6px solid #ffffff55;border-top-color:#fff;animation:g 1s linear infinite}
+@keyframes g{to{transform:rotate(360deg)}}#load h2{color:#fff;margin:26px 0 0;opacity:0;font-size:32px;transition:.4s}
+#load.nome h2{opacity:1}
+#pag{display:none;max-width:1000px;margin:auto;padding:20px}.voltar{background:none;border:0;color:var(--cor);font-weight:700;cursor:pointer;font-size:16px}
+.prods{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:14px}
+.prod{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 14px #5b3a2d22}
+.prod .foto{background:#E4DACE;height:170px;display:flex;align-items:center;justify-content:center}.prod .foto img{height:150px}
+.prod div.t{padding:14px}.prod h4{color:var(--cor);font-size:18px}.prod p{font-size:14px;margin:6px 0 10px;line-height:1.4}
+.prod a{display:block;text-align:center;background:#25D366;color:#fff;border-radius:20px;padding:8px;text-decoration:none;font-weight:700}
+footer{background:var(--cor);color:#fff;text-align:center;padding:24px}footer a{color:#fff}
+</style></head><body>
+<header><img src="img/vivi-rosto.jpg" alt=""><b>Doces da Vivi</b><a href="https://www.instagram.com/ateliedavivi.doces" target="_blank">Instagram</a></header>
+<div class="faixa"><div id="faixa"></div></div>
+<section class="hero"><img src="img/vivi-oi.jpg" alt="Vivi"><div class="infos"><h1>Doces feitos com carinho 🍰</h1>
+<div class="info"><b>🚚 Entrega</b><br>Em toda Mineiros-GO</div><div class="info"><b>💳 Pagamento</b><br>Em até 2x no cartão</div><div class="info"><b>📲 Peça pelo WhatsApp</b><br>(64) 99968-0057</div></div></section>
+<h2>Conheça nossos sabores</h2><section class="cats" id="cats"></section>
+<section id="pag"><button class="voltar" onclick="voltar()">← Voltar</button><h2 id="tit"></h2><div class="prods" id="prods"></div></section>
+<div id="load"><div class="circ"><img src="img/vivi-rosto.jpg" alt=""></div><h2 id="ln"></h2></div>
+<footer>Doces da Vivi · Mineiros-GO · <a href="https://wa.me/5564999680057">WhatsApp (64) 99968-0057</a></footer>
+<script>
+const FONE="5564999680057";
+// EDITE AQUI: produtos de cada categoria (nome, descrição e foto opcional)
+const CATS=[
+{id:"bolos",nome:"BOLOS",img:"img/vivi-bolo.jpg",itens:[
+ {n:"Bolo de Brigadeiro",d:"Massa fofinha de chocolate com recheio cremoso de brigadeiro e cobertura de granulado."},
+ {n:"Bolo de Ninho com Morango",d:"Massa branca, creme de leite ninho e morangos frescos."}]},
+{id:"festas",nome:"DOCES FESTAS",img:"img/vivi-doces.jpg",itens:[
+ {n:"Kit Festa 50 doces",d:"Brigadeiros, beijinhos e cajuzinhos para sua festa. Consulte sabores."},
+ {n:"Kit Festa 100 doces",d:"Cento de doces variados, entregues em forminhas decoradas."}]},
+{id:"doces",nome:"DOCES",img:"img/vivi-doces.jpg",itens:[
+ {n:"Brigadeiro Gourmet",d:"Brigadeiro cremoso com chocolate nobre, vendido por unidade ou caixa."},
+ {n:"Palha Italiana",d:"Brigadeiro com biscoito, enrolado no açúcar."}]}];
+const msg=["🚚 Entrega em toda Mineiros-GO","💳 Em até 2x no cartão","📲 Peça pelo WhatsApp","🍰 Feito com carinho"];
+faixa.innerHTML=(msg.map(m=>`<span>${m}</span>`).join("")).repeat(6);
+cats.innerHTML=CATS.map(c=>`<button class="cat" onclick="abrir('${c.id}')"><img src="${c.img}" alt=""><h3>${c.nome}</h3><span>Saiba mais</span></button>`).join("");
+function abrir(id){const c=CATS.find(x=>x.id==id);ln.textContent=c.nome;load.classList.remove("nome");load.style.display="flex";
+ setTimeout(()=>load.classList.add("nome"),900);
+ setTimeout(()=>{tit.textContent=c.nome;prods.innerHTML=c.itens.map(i=>`<div class="prod"><div class="foto">${i.f?`<img src="${i.f}">`:`<img src="${c.img}">`}</div><div class="t"><h4>${i.n}</h4><p>${i.d}</p><a target="_blank" href="https://wa.me/${FONE}?text=${encodeURIComponent('Oi Vivi! Quero encomendar: '+i.n)}">Pedir no WhatsApp</a></div></div>`).join("");
+ cats.style.display="none";document.querySelector(".hero").style.display="none";document.querySelector("h2").style.display="none";pag.style.display="block";load.style.display="none";scrollTo(0,0)},2000)}
+function voltar(){pag.style.display="none";cats.style.display="";document.querySelector(".hero").style.display="";document.querySelector("h2").style.display=""}
+</script></body></html>
